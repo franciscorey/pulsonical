@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pulsonic - Catálogo Retro-Moderno</title>
+    <title>Pulsonic Store - Ecosistema Omnicanal</title>
     <style>
-        /* Variables y Reset */
+        /* --- SISTEMA DE DISEÑO & VARIABLES --- */
         :root {
-            --bg-color: #f7f7f7;
+            --bg-main: #f8f9fa;
+            --bg-card: #ffffff;
             --text-main: #111111;
-            --text-muted: #666666;
+            --text-muted: #6c757d;
             --accent-yellow: #fce300;
-            --border-color: #e5e5e5;
-            --card-bg: #ffffff;
-            --radius: 12px;
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --border-color: #e9ecef;
+            --radius-lg: 16px;
+            --radius-sm: 8px;
+            --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --transition: all 0.25s ease;
         }
 
         * {
@@ -24,149 +26,243 @@
         }
 
         body {
-            font-family: var(--font-main);
-            background-color: var(--bg-color);
+            font-family: var(--font-stack);
+            background-color: var(--bg-main);
             color: var(--text-main);
             line-height: 1.5;
-            padding: 2rem;
+            overflow-x: hidden;
         }
 
-        /* Layout Principal */
-        .app-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .logo-area {
+        /* --- LOGOS & UTILIDADES --- */
+        .logo-container {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 12px;
             font-weight: 800;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             letter-spacing: -0.5px;
+            cursor: pointer;
         }
 
         .logo-icon {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             background: var(--text-main);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
+            font-weight: 900;
         }
 
-        .search-bar {
+        .badge {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        /* --- HEADER & NAVEGACIÓN --- */
+        header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+
+        .search-wrapper {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            padding: 10px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            background: var(--bg-main);
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-wrapper input:focus {
+            border-color: var(--text-main);
+            background: var(--bg-card);
+        }
+
+        .header-actions {
             display: flex;
             align-items: center;
-            background: var(--bg-color);
-            border-radius: 20px;
-            padding: 0.5rem 1rem;
-            width: 300px;
+            gap: 1.5rem;
         }
 
-        .search-bar input {
+        .nav-btn {
+            background: none;
             border: none;
-            background: transparent;
-            outline: none;
-            width: 100%;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        .cart-count {
+            background: var(--text-main);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 7px;
+            border-radius: 10px;
+        }
+
+        /* Barra de Categorías / Formatos */
+        .category-nav {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 0.75rem 2rem;
+        }
+
+        .nav-links {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
             font-size: 0.9rem;
+            transition: var(--transition);
+            cursor: pointer;
         }
 
-        /* Contenido Grid */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            min-height: 700px;
+        .nav-links a.active, .nav-links a:hover {
+            color: var(--text-main);
         }
 
-        /* Sidebar Filtros */
-        aside {
-            padding: 2rem;
-            border-right: 1px solid var(--border-color);
+        /* --- HERO BANNER --- */
+        .hero {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
         }
 
-        .filter-group {
+        .hero-banner {
+            background: linear-gradient(135deg, #111 0%, #333 100%);
+            color: white;
+            padding: 4rem 3rem;
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-banner p {
+            color: #ccc;
+            max-width: 500px;
             margin-bottom: 1.5rem;
         }
 
-        .filter-group label {
-            display: block;
-            font-size: 0.75rem;
+        .btn-primary {
+            background: var(--accent-yellow);
+            color: var(--text-main);
+            border: none;
+            padding: 12px 24px;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-        }
-
-        select {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background: var(--card-bg);
-            font-family: inherit;
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .btn-clear {
-            width: 100%;
-            padding: 0.75rem;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 30px;
             cursor: pointer;
-            font-weight: 600;
-            margin-top: 1rem;
-            transition: all 0.2s;
-        }
-        
-        .btn-clear:hover {
-            background: var(--bg-color);
+            transition: var(--transition);
         }
 
-        /* Main Catálogo */
-        main {
-            padding: 2rem;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(252, 227, 0, 0.3);
         }
 
-        .catalog-header {
+        /* --- CONTENEDOR PRINCIPAL (GRID) --- */
+        .store-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem 2rem;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 2.5rem;
+        }
+
+        /* Sidebar Filtros */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .filter-section {
             margin-bottom: 2rem;
         }
 
-        .catalog-header h1 {
-            font-size: 2rem;
+        .filter-section h3 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .checkbox-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* --- GRILLA DE PRODUCTOS --- */
+        .section-title {
+            font-size: 1.75rem;
             font-weight: 800;
-            letter-spacing: -1px;
-            line-height: 1.1;
+            letter-spacing: -0.5px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .products-grid {
@@ -175,204 +271,586 @@
             gap: 2rem;
         }
 
-        /* Tarjetas de Producto */
         .product-card {
+            background: transparent;
             display: flex;
             flex-direction: column;
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
         }
 
-        .cover-image {
+        .image-wrapper {
+            position: relative;
             width: 100%;
             aspect-ratio: 1;
-            background-color: var(--bg-color);
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: #eef0f2;
             margin-bottom: 1rem;
-            object-fit: cover;
             border: 1px solid var(--border-color);
         }
 
-        .artist {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 0.2rem;
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
         }
 
-        .title {
+        .product-card:hover .product-image {
+            transform: scale(1.04);
+        }
+
+        .tag-oferta {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff3b30;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .product-artist {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .product-title {
             font-size: 1rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        .price-row {
+        .product-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: auto;
         }
 
-        .price {
+        .product-price {
             font-weight: 800;
             font-size: 1.1rem;
         }
 
-        .condition-badge {
-            background: var(--bg-color);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 700;
+        /* --- MODAL DETALLE DE DISCO (TRACKLIST) --- */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 650px;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            padding: 2.5rem;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modal-header-layout {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .modal-img {
+            width: 150px;
+            height: 150px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
             border: 1px solid var(--border-color);
         }
 
+        .track-list {
+            margin-top: 1.5rem;
+            list-style: none;
+        }
+
+        .track-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        /* --- SECCIÓN MÉTODOS DE PAGO --- */
+        .payment-banner {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 1400px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .payment-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* --- FOOTER CONSOLIDADO --- */
+        footer {
+            background: #111;
+            color: white;
+            padding: 4rem 2rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            border-bottom: 1px solid #222;
+            padding-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col ul li a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 2rem auto 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #666;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* --- WIDGET FLOATING CHAT --- */
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 99;
+            transition: var(--transition);
+        }
+
+        .chat-widget:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- RESPONSIVIDAD (MEDIA QUERIES) --- */
+        @media (max-width: 992px) {
+            .store-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: none; /* Simplificado para móviles en este paso */
+            }
+            .hero-banner h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .search-wrapper {
+                max-width: 100%;
+                width: 100%;
+            }
+            .category-nav {
+                overflow-x: auto;
+            }
+            .nav-links {
+                gap: 1.25rem;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <header>
-            <div class="logo-area">
+    <header>
+        <div class="header-top">
+            <div class="logo-container" onclick="loadInitialCatalog()">
                 <div class="logo-icon">P</div>
-                Pulsonic
+                pulsonic
             </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Buscar discos, artistas, sellos...">
-            </div>
-        </header>
-
-        <div class="content-grid">
             
-            <aside>
-                <div class="filter-group">
-                    <label>Sello</label>
-                    <select>
-                        <option>Todos</option>
-                        <option>Harvest</option>
-                        <option>EMI</option>
-                        <option>Modular</option>
-                    </select>
+            <div class="search-wrapper">
+                <input type="text" id="search-input" placeholder="Buscar álbumes, artistas en Apple API..." onkeyup="handleSearch(event)">
+            </div>
+
+            <div class="header-actions">
+                <button class="nav-btn" onclick="alert('Funcionalidad de login de usuario simulada con éxito.')">
+                    👤 <span class="hide-mobile">Ingresar</span>
+                </button>
+                <button class="nav-btn" onclick="toggleCartAction()">
+                    🛒 <span>Carrito</span>
+                    <span class="cart-count" id="cart-counter">0</span>
+                </button>
+            </div>
+        </div>
+
+        <nav class="category-nav">
+            <ul class="nav-links">
+                <li><a class="active" onclick="switchCategory('all', this)">Todos</a></li>
+                <li><a onclick="switchCategory('vinilo', this)">🎚️ Vinilos</a></li>
+                <li><a onclick="switchCategory('cassette', this)">📼 Cassettes</a></li>
+                <li><a onclick="switchCategory('cd', this)">💿 CDs</a></li>
+                <li><a onclick="switchCategory('merch', this)">👕 Merchandising</a></li>
+                <li><a onclick="switchCategory('ofertas', this)">🏷️ Ofertas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-banner">
+            <span class="badge" style="background: rgba(255,255,255,0.1); border: none; color: white;">Novedades de la semana</span>
+            <h1 style="margin-top: 0.5rem;">Explora Sonidos<br>Retro-Modernos</h1>
+            <p>Conexión directa en tiempo real con bases de datos musicales mundiales para melómanos y coleccionistas.</p>
+            <button class="btn-primary" onclick="document.getElementById('search-input').focus()">Buscar Discos</button>
+        </div>
+    </section>
+
+    <div class="payment-banner">
+        <div class="payment-item">💳 Tarjetas de Crédito / Débito</div>
+        <div class="payment-item">🏦 Transferencia Bancaria Directa</div>
+        <div class="payment-item">⚡ MercadoPago / Webpay</div>
+        <div class="payment-item">📦 Envíos a todo el país garantizados</div>
+    </div>
+
+    <div class="store-container">
+        
+        <aside class="sidebar">
+            <div class="filter-section">
+                <h3>Géneros Principales</h3>
+                <div class="checkbox-list">
+                    <label class="checkbox-label"><input type="checkbox" checked onclick="filterByGenre('Rock')"> Rock</label>
+                    <label class="checkbox-label"><input type="checkbox" checked onclick="filterByGenre('Electronic')"> Electronic</label>
+                    <label class="checkbox-label"><input type="checkbox" checked onclick="filterByGenre('Pop')"> Pop</label>
+                    <label class="checkbox-label"><input type="checkbox" checked onclick="filterByGenre('Alternative')"> Alternative</label>
                 </div>
+            </div>
 
-                <div class="filter-group">
-                    <label>Año de Prensa</label>
-                    <select>
-                        <option>Todos</option>
-                        <option>1970s</option>
-                        <option>1980s</option>
-                        <option>2010s</option>
-                    </select>
+            <div class="filter-section">
+                <h3>Estado Conservación</h3>
+                <div class="checkbox-list">
+                    <label class="checkbox-label"><input type="checkbox" checked> NM (Near Mint)</label>
+                    <label class="checkbox-label"><input type="checkbox"> VG+ (Very Good Plus)</label>
+                    <label class="checkbox-label"><input type="checkbox"> VG (Very Good)</label>
                 </div>
+            </div>
+        </aside>
 
-                <div class="filter-group">
-                    <label>Estado de Conservación</label>
-                    <div class="checkbox-group">
-                        <label class="checkbox-item"><input type="checkbox"> NM</label>
-                        <label class="checkbox-item"><input type="checkbox"> VG+</label>
-                        <label class="checkbox-item"><input type="checkbox"> VG</label>
-                        <label class="checkbox-item"><input type="checkbox"> G</label>
-                    </div>
+        <main>
+            <h2 class="section-title" id="gallery-title">Catálogo Destacado</h2>
+            <div class="products-grid" id="products-target">
                 </div>
+        </main>
+    </div>
 
-                <div class="filter-group">
-                    <label>Formato</label>
-                    <div class="checkbox-group">
-                        <label class="checkbox-item"><input type="checkbox" checked> Vinilo</label>
-                        <label class="checkbox-item"><input type="checkbox"> Cassette</label>
-                        <label class="checkbox-item"><input type="checkbox"> CD</label>
-                    </div>
+    <div class="modal" id="details-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">✕</button>
+            <div id="modal-body-content">
                 </div>
-
-                <button class="btn-clear">Limpiar filtros</button>
-            </aside>
-
-            <main>
-                <div class="catalog-header">
-                    <h1>Catálogo<br>Retro-Moderno</h1>
-                </div>
-
-                <div class="products-grid" id="catalog-container">
-                    </div>
-            </main>
-
         </div>
     </div>
 
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo-container" style="color: white; margin-bottom: 1rem;">
+                    <div class="logo-icon" style="background: white; color: black;">P</div>
+                    pulsonic
+                </div>
+                <p style="color: #888; font-size: 0.9rem;">Ecosistema Omnicanal para la preservación de la cultura musical en formato físico.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Mapa del Sitio</h4>
+                <ul>
+                    <li><a href="#">Catálogo Completo</a></li>
+                    <li><a href="#">Lanzamientos Especiales</a></li>
+                    <li><a href="#">Merchandising Oficial</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Ubicación & Contacto</h4>
+                <p style="color: #888; font-size: 0.9rem; margin-bottom: 0.5rem;">📍 Av. Providencia 1240, Santiago, Chile</p>
+                <p style="color: #888; font-size: 0.9rem;">✉️ soporte@pulsonicstore.cl</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 Pulsonic Store. Desarrollado con CSS Puro.</div>
+            <div>Diseño Retro-Moderno Eficiente</div>
+        </div>
+    </footer>
+
+    <a href="#" class="chat-widget" id="whatsapp-widget" onclick="sendWhatsApp(event)">
+        💬 Comprar por WhatsApp (<span id="chat-cart-count">0</span>)
+    </a>
+
     <script>
-        const products = [
-            {
-                artist: "PINK FLOYD",
-                title: "The Dark Side of the Moon",
-                price: "$36.000",
-                condition: "NM",
-                img: "https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png"
-            },
-            {
-                artist: "KRAFTWERK",
-                title: "Computer World",
-                price: "$32.000",
-                condition: "VG+",
-                img: "https://upload.wikimedia.org/wikipedia/en/a/a6/Kraftwerk_-_Computer_World.png"
-            },
-            {
-                artist: "TAME IMPALA",
-                title: "Currents",
-                price: "$38.000",
-                condition: "NM",
-                img: "https://upload.wikimedia.org/wikipedia/en/9/9b/Tame_Impala_-_Currents.png"
-            },
-            {
-                artist: "KRAFTWERK",
-                title: "The Man Machine",
-                price: "$32.000",
-                condition: "VG+",
-                img: "https://upload.wikimedia.org/wikipedia/en/1/1b/Kraftwerk_-_The_Man-Machine.png"
-            },
-            {
-                artist: "TAME IMPALA",
-                title: "Innerspeaker",
-                price: "$34.000",
-                condition: "NM",
-                img: "https://upload.wikimedia.org/wikipedia/en/e/ec/Tame_Impala_Innerspeaker.png"
-            },
-            {
-                artist: "PINK FLOYD",
-                title: "Wish You Were Here",
-                price: "$36.000",
-                condition: "VG+",
-                img: "https://upload.wikimedia.org/wikipedia/en/b/b4/Pink_Floyd_-_Wish_You_Were_Here.png"
-            }
-        ];
+        let currentCart = [];
+        let loadedTracksCache = {};
 
-        const catalogContainer = document.getElementById('catalog-container');
+        // Catálogo Base Inicial para no mostrar el sitio vacío al cargar
+        const backupSeed = ["Pink Floyd", "Kraftwerk", "Tame Impala", "Daft Punk"];
 
-        // Función para renderizar el catálogo
-        function renderCatalog() {
-            catalogContainer.innerHTML = '';
+        document.addEventListener("DOMContentLoaded", () => {
+            loadInitialCatalog();
+        });
+
+        // Cargar catálogo inicial consumiendo la API de Apple de manera dinámica
+        async function loadInitialCatalog() {
+            document.getElementById('gallery-title').innerText = "Catálogo Destacado";
+            let allResults = [];
             
-            products.forEach(product => {
+            for(let term of backupSeed) {
+                const res = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(term)}&entity=album&limit=2`);
+                const data = await res.json();
+                if(data.results) allResults = [...allResults, ...data.results];
+            }
+            renderGrid(allResults);
+        }
+
+        // Manejador del Buscador en tiempo real (Trigger con tecla Enter)
+        async function handleSearch(event) {
+            if (event.key === "Enter") {
+                const query = document.getElementById('search-input').value;
+                if(!query) return loadInitialCatalog();
+                
+                document.getElementById('gallery-title').innerText = `Resultados para: "${query}"`;
+                const res = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=album&limit=12`);
+                const data = await res.json();
+                renderGrid(data.results);
+            }
+        }
+
+        // Renderizador de la Grilla de Productos
+        function renderGrid(albums) {
+            const container = document.getElementById('products-target');
+            container.innerHTML = '';
+
+            if(!albums || albums.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; color: var(--text-muted);">No se encontraron álbumes o productos.</p>';
+                return;
+            }
+
+            albums.forEach((album, index) => {
+                // Generación de precios consistentes en base a ID de Apple
+                const priceValue = (album.collectionId % 15) * 2000 + 16000; 
+                const formattedPrice = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(priceValue);
+                
+                // Redimensionar la carátula de Apple API para mayor calidad (de 100x100 a 400x400)
+                const highResCover = album.artworkUrl100.replace('100x100bb.jpg', '400x400bb.jpg');
+
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                
+                card.onclick = () => openAlbumDetails(album, formattedPrice, highResCover);
+
+                // Marcador de oferta aleatorio para simular la vista comercial
+                const esOferta = index % 3 === 0 ? '<span class="tag-oferta">OFERTA</span>' : '';
+
                 card.innerHTML = `
-                    <img src="${product.img}" alt="${product.title}" class="cover-image" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20style%3D%22background%3A%23eee%22%3E%3C%2Fsvg%3E'">
-                    <div class="artist">${product.artist}</div>
-                    <div class="title">${product.title}</div>
-                    <div class="price-row">
-                        <span class="price">${product.price}</span>
-                        <span class="condition-badge">${product.condition}</span>
+                    <div class="image-wrapper">
+                        ${esOferta}
+                        <img src="${highResCover}" class="product-image" alt="${album.collectionName}">
+                    </div>
+                    <div class="product-artist">${album.artistName}</div>
+                    <div class="product-title">${album.collectionName}</div>
+                    <div class="product-footer">
+                        <span class="product-price">${formattedPrice}</span>
+                        <span class="badge">NM</span>
                     </div>
                 `;
-                
-                catalogContainer.appendChild(card);
+                container.appendChild(card);
             });
         }
 
-        // Inicializar
-        renderCatalog();
+        // Abrir Modal y consumir la API para obtener el Tracklist específico del álbum
+        async function openAlbumDetails(album, price, cover) {
+            const modal = document.getElementById('details-modal');
+            const body = document.getElementById('modal-body-content');
+            
+            body.innerHTML = `<p style="color: var(--text-muted);">Cargando metadatos y tracks oficiales...</p>`;
+            modal.style.display = 'flex';
+
+            // Fetch de las canciones del álbum usando el ID único de la colección de Apple
+            const trackRes = await fetch(`https://itunes.apple.com/lookup?id=${album.collectionId}&entity=song`);
+            const trackData = await trackRes.json();
+            
+            // Filtrar el primer elemento que siempre corresponde al propio objeto Álbum en la API de Apple
+            const tracks = trackData.results.filter(item => item.wrapperType === 'track');
+
+            let tracksHTML = '';
+            if(tracks.length > 0) {
+                tracks.forEach(t => {
+                    tracksHTML += `<li class="track-item"><span>${t.trackNumber}. ${t.trackName}</span> <span style="color: var(--text-muted); font-size: 0.8rem;">${msToMinutes(t.trackTimeMillis)}</span></li>`;
+                });
+            } else {
+                tracksHTML = '<li class="track-item">Lista de tracks no disponible para este formato físico.</li>';
+            }
+
+            const releaseYear = new Date(album.releaseDate).getFullYear();
+
+            body.innerHTML = `
+                <div class="modal-header-layout">
+                    <img src="${cover}" class="modal-img" alt="">
+                    <div>
+                        <div class="product-artist">${album.artistName}</div>
+                        <h2 style="font-size: 1.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem;">${album.collectionName}</h2>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Año Prensa: ${releaseYear} | Sello: ${album.primaryGenreName}</p>
+                        <div style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem;">${price}</div>
+                        <button class="btn-primary" onclick="addToCart('${album.collectionName.replace(/'/g, "")}', '${price}')">Añadir al Carrito</button>
+                    </div>
+                </div>
+                <h3>Lista de Tracks Oficiales (Metadatos Apple API)</h3>
+                <ul class="track-list">${tracksHTML}</ul>
+            `;
+        }
+
+        function closeModal() {
+            document.getElementById('details-modal').style.display = 'none';
+        }
+
+        // Lógica de Gestión de Carrito de Compras
+        function addToCart(title, price) {
+            currentCart.push({ title, price });
+            document.getElementById('cart-counter').innerText = currentCart.length;
+            document.getElementById('chat-cart-count').innerText = currentCart.length;
+            alert(`"${title}" ha sido agregado al carrito con éxito.`);
+            closeModal();
+        }
+
+        function toggleCartAction() {
+            if(currentCart.length === 0) {
+                alert("Tu carrito de compras está vacío actualmente. Explora la tienda e integra discos.");
+            } else {
+                let itemsList = currentCart.map(i => `- ${i.title} (${i.price})`).join('\n');
+                alert(`Productos en tu carrito:\n\n${itemsList}\n\nPuedes enviarlo de inmediato a través del botón de chat.`);
+            }
+        }
+
+        // Filtrado por Categorías simulado con inyecciones personalizadas (Merchandising / Ofertas)
+        function switchCategory(category, element) {
+            document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+
+            if(category === 'all' || category === 'vinilo' || category === 'cassette' || category === 'cd') {
+                loadInitialCatalog();
+            } else if (category === 'merch') {
+                const target = document.getElementById('products-target');
+                target.innerHTML = `
+                    <div class="product-card">
+                        <div class="image-wrapper"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22300%22%20height%3D%22300%22%20style%3D%22background%3A%23222%22%3E%3Ctext%20x%3D%2220%22%20y%3D%22150%22%20fill%3D%22%23fff%22%3EPulsonic%20Official%20T-Shirt%3C%2Ftext%3E%3C%2Fsvg%3E" class="product-image"></div>
+                        <div class="product-artist">PULSONIC</div>
+                        <div class="product-title">Polera Oficial Logotipo Negro</div>
+                        <div class="product-footer"><span class="product-price">$19.990</span></div>
+                    </div>
+                `;
+            } else if (category === 'ofertas') {
+                document.getElementById('gallery-title').innerText = "Liquidación y Ofertas Especiales";
+                loadInitialCatalog(); // Las ofertas se marcan con el tag rojo de manera aleatoria.
+            }
+        }
+
+        // Utilidad: Transformación de milisegundos a formato Minutos:Segundos
+        function msToMinutes(ms) {
+            const minutes = Math.floor(ms / 60000);
+            const seconds = ((ms % 60000) / 1000).toFixed(0);
+            return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+        }
+
+        // Envío Estructurado Automatizado a WhatsApp para cerrar la compra física (Omnicanal)
+        function sendWhatsApp(e) {
+            e.preventDefault();
+            if(currentCart.length === 0) {
+                alert("Agrega productos al carrito para generar el pedido directo por WhatsApp.");
+                return;
+            }
+            let text = "Hola Pulsonic Store, me interesa comprar los siguientes productos de mi catálogo:\n\n";
+            currentCart.forEach(item => {
+                text += `${item.title} - ${item.price}\n`;
+            });
+            window.open(`https://wa.me/56912345678?text=${encodeURIComponent(text)}`, '_blank');
+        }
     </script>
 </body>
 </html>
